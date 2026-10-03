@@ -1,8 +1,8 @@
-/* Math Live Student V5.8.1 · © 2026 Rene M. Velazquez Avila */
+/* Math Live Student V5.8.3 · © 2026 Rene M. Velazquez Avila */
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
 const sections=['studentJoin','studentWait','play','finish'];
 function show(id){sections.forEach(x=>$('#'+x)?.classList.toggle('hidden',x!==id));window.scrollTo({top:0,behavior:'smooth'})}
-const avatars=Array.from({length:18},(_,i)=>({id:`avatar-${String(i+1).padStart(2,'0')}`,src:`assets/avatar-${String(i+1).padStart(2,'0')}.webp?v=581`}));
+const avatars=Array.from({length:18},(_,i)=>({id:`avatar-${String(i+1).padStart(2,'0')}`,src:`assets/avatar-${String(i+1).padStart(2,'0')}.webp?v=583`}));
 function avatarSrc(id){return (avatars.find(a=>a.id===id)||avatars[0]).src}
 function avatarImg(id,cls='avatarImage'){return `<img class="${cls}" src="${avatarSrc(id)}" alt="Avatar" draggable="false">`}
 let selectedAvatar='avatar-01',db=null,auth=null,game=null,studentId=null,questions=[],idx=0,score=0,responses=[],unsubs=[],timerHandle=null,finalizing=false;
