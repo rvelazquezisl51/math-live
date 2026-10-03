@@ -1,12 +1,13 @@
-# Math Live V5.8 — Identidad visual real
-
-Versión completa basada en V5.7.
-
-- Nueva identidad visual integrada en la aplicación real.
-- 18 avatares gráficos reales (sin emojis).
-- El avatar se conserva en estudiante, lobby, maestro, TV y resultados.
-- Cache-busting `?v=580` y directivas no-cache para evitar recursos antiguos tras actualizar GitHub Pages.
-- Conserva autenticación del maestro, acceso anónimo del estudiante, cronómetro global, cierre de inscripciones, TV, resultados y diagnóstico.
-- No requiere volver a cambiar Firestore si ya publicaste las reglas V5.7.
+# Math Live V5.8.1 — Identidad visual corregida + partidas incompletas
 
 © 2026 Rene M. Velazquez Avila · Espacio de Aprendizaje · Todos los derechos reservados.
+
+## Ajustes
+- Fondo limpio: conserva niños, robot, cascada, puente, castillo y colores, pero elimina la interfaz duplicada del fondo.
+- El formulario HTML es la única interfaz de entrada visible.
+- TV usa la misma identidad visual sin mostrar controles privados del maestro.
+- No existe botón de “abandonar partida” para estudiantes.
+- Si un estudiante deja de participar o cierra la página, su resultado final conserva denominador total: por ejemplo 5 aciertos de 15 = 5/15.
+- Al finalizar, toda pregunta no contestada se contabiliza como “Sin responder”, no como incorrecta.
+- Cache busting actualizado a V5.8.1 (?v=581).
+- Firebase/Auth/Firestore y motor matemático permanecen sobre la arquitectura V5.7/V5.8.
