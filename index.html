@@ -25,7 +25,7 @@ main{max-width:1100px;margin:22px auto;padding:0 16px}.card{background:#fff;bord
 <section id="teacherSetup" class="card hidden">
  <div class="step">Paso 1 · Elige el grado</div><h2>¿Quién va a jugar?</h2>
  <div class="gradeGrid" id="grades"></div>
- <div class="step">Paso 2 · Elige el contenido</div><h3 id="contentTitle">Contenido matemático</h3><div class="topicGrid" id="topics"></div>
+ <div class="step">Paso 2 · Modo de práctica</div><h3>Práctica matemática</h3><div class="summary"><strong>🌟 Modo Integrado</strong><br><span class="small">Combina contenidos, representaciones y niveles cognitivos apropiados para el grado.</span></div><div id="contentTitle" class="hidden"></div><div id="topics" class="hidden"></div>
  <div class="step">Paso 3 · Elige la partida</div><h3>¿Cómo quieres practicar?</h3><div class="gameGrid" id="games"></div>
  <div class="row"><div class="field"><label>Número de desafíos</label><select id="qcount"><option>10</option><option selected>15</option><option>20</option></select></div><div class="field"><label>Modo</label><select id="mode"><option value="individual">Individual</option><option value="team">Equipo</option></select></div></div>
  <div class="summary" id="setupSummary"></div><button class="btn yellow" id="createGame">Crear código de partida →</button> <button class="btn ghost back">Volver</button>
@@ -41,4 +41,5 @@ main{max-width:1100px;margin:22px auto;padding:0 16px}.card{background:#fff;bord
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="firebase-config.js"></script>
+<script src="math-engine-v2.js"></script>
 <script src="app.js"></script></body></html>

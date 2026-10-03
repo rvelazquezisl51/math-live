@@ -30,7 +30,7 @@ service cloud.firestore {
                       && request.resource.data.uid == resource.data.uid
                       && request.resource.data.name == resource.data.name
                       && request.resource.data.diff(resource.data).affectedKeys()
-                           .hasOnly(['score','answered','finished','lastSkill']);
+                           .hasOnly(['score','answered','finished','lastSkill','lastStandard','lastLayer','evidence','diagnostic','finishedAt']);
         allow delete: if false;
       }
     }
