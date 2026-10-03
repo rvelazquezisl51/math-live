@@ -1,8 +1,7 @@
-/* Math Live TV V1.0 · © 2026 Rene M. Velazquez Avila · Todos los derechos reservados. */
+/* Math Live TV V5.8 · © 2026 Rene M. Velazquez Avila · Todos los derechos reservados. */
 const $=s=>document.querySelector(s);
-const avatars={explorer:'🧑‍🚀',scientist:'🧑‍🔬',artist:'🧑‍🎨',hero:'🦸',ninja:'🥷',wizard:'🧙',robot:'🤖',fox:'🦊',panda:'🐼',lion:'🦁',unicorn:'🦄',dragon:'🐲',cat:'🐱',dog:'🐶',owl:'🦉',tiger:'🐯'};
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const face=id=>avatars[id]||avatars.explorer;
+const face=id=>`<img src="assets/${/^avatar-\d{2}$/.test(id||'')?id:'avatar-01'}.webp?v=580" alt="">`;
 const params=new URLSearchParams(location.search), code=params.get('code')||'';
 let db=null,auth=null,game=null,players=[],timer=null;
 function showOnly(id){['lobby','playing','final','tvError'].forEach(x=>$('#'+x).classList.toggle('hidden',x!==id))}
