@@ -1,17 +1,17 @@
-# Math Live V5.8.3 — Candidata para prueba real
+# Math Live V5.8.4 — Fondo limpio verificado
 
-© 2026 Rene M. Velazquez Avila · Espacio de Aprendizaje · Todos los derechos reservados.
+Versión de prueba corregida.
 
-## Cerrado para fase de prueba
-- Estudiante, Maestro y TV en vistas separadas.
+## Corrección principal
+- Nuevo fondo `assets/math-live-world-v584.png` creado SIN panel, formularios, avatares ni botones incrustados.
+- El único panel de estudiante es el HTML funcional.
+- Cache-busting actualizado a V5.8.4 (`v=584`).
+
+## Se conserva
 - 18 avatares gráficos.
-- Entrada bloqueada al iniciar la partida.
-- Temporizador global.
-- Sin botón de abandonar: lo no realizado queda como Sin responder.
-- TV lobby: avatar + nombre + orden de entrada.
-- TV durante Modo Integrado: progreso respondidas/total y 15 indicadores; no muestra aciertos/errores ni ranking.
-- Maestro durante juego: respondidas + correctas + incorrectas en privado.
-- Resultado final: correctas/total; desempate por tiempo de finalización.
-- Cache busting V5.8.3 (`v=583`).
-
-No requiere cambios adicionales en Firestore respecto a las reglas de seguridad ya publicadas para V5.7.
+- Vistas separadas Estudiante / Maestro / TV.
+- TV: orden de entrada + avatar + nombre en lobby; progreso público sin exponer aciertos/errores durante Modo Integrado.
+- Maestro: progreso privado con aciertos/errores.
+- Entrada bloqueada al comenzar.
+- Temporizador global y tratamiento de preguntas sin responder.
+- Firebase/Auth/Firestore y motor matemático sin cambios de arquitectura.
