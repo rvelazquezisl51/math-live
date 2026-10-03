@@ -1,9 +1,6 @@
-/* Math Live V5.1 — Firebase
-   Proyecto: math-live-8db8e
-   IMPORTANTE: pega la API key exacta de Firebase en apiKey. No la inventes.
-*/
+/* Math Live V5.1 — Firebase configuration */
 window.MATHLIVE_FIREBASE_CONFIG = {
-  apiKey: "",
+  apiKey: "AIzaSyAC9kkUk4OJ9Z3zAH3QaJHNse3ervWMxKQ",
   authDomain: "math-live-8db8e.firebaseapp.com",
   projectId: "math-live-8db8e",
   storageBucket: "math-live-8db8e.firebasestorage.app",
