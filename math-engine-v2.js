@@ -147,7 +147,9 @@ function validate(q){
 }
 function blueprint(g,count=15){
  let core=META[g],rev=REVIEW[g],slots=[];
- let coreN=g===0?13:10,reviewN=g===0?0:3,integrated=15-coreN-reviewN;
+ count=Math.max(1,Number(count)||15);
+ let coreN,reviewN,integrated;
+ if(g===0){coreN=Math.max(1,Math.round(count*0.87));reviewN=0;integrated=count-coreN}else{coreN=Math.max(1,Math.round(count*0.67));reviewN=Math.max(1,Math.round(count*0.20));if(coreN+reviewN>=count)reviewN=Math.max(0,count-coreN-1);integrated=count-coreN-reviewN}
  let c=S(core);for(let i=0;i<coreN;i++){let m=c[i%c.length];slots.push({layer:"CORE",skill:m[3],standard:m[0],content:m[1],subskill:m[2],cognitive:m[4],difficulty:m[5],sourceGrade:g})}
  for(let i=0;i<reviewN;i++){let sk=rev[i%rev.length],sg=reviewOrigin(g,sk),m=META[sg].find(x=>x[3]===sk);slots.push({layer:"REVIEW",skill:sk,standard:m?.[0]||"PREREQ",content:m?.[1]||"Prerequisite",subskill:m?.[2]||sk,cognitive:m?.[4]||"review",difficulty:m?.[5]||1,sourceGrade:sg})}
  for(let i=0;i<integrated;i++){let m=P(core);slots.push({layer:"APPLICATION",skill:m[3],standard:m[0],content:m[1],subskill:m[2],cognitive:"apply/reason",difficulty:Math.min(4,m[5]+1),sourceGrade:g})}

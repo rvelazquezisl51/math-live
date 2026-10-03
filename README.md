@@ -1,4 +1,4 @@
-# Math Live V5.8.5 — Panel Maestro Completo
+# Math Live V5.8.6 — Panel Maestro Completo
 
 © 2026 Rene M. Velazquez Avila · Espacio de Aprendizaje · Todos los derechos reservados.
 
