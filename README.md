@@ -1,17 +1,15 @@
-# Math Live V5.8.4 — Fondo limpio verificado
+# Math Live V5.8.5 — Panel Maestro Completo
 
-Versión de prueba corregida.
+© 2026 Rene M. Velazquez Avila · Espacio de Aprendizaje · Todos los derechos reservados.
 
-## Corrección principal
-- Nuevo fondo `assets/math-live-world-v584.png` creado SIN panel, formularios, avatares ni botones incrustados.
-- El único panel de estudiante es el HTML funcional.
-- Cache-busting actualizado a V5.8.4 (`v=584`).
+## Cambios principales
+- Nueva partida desde resultados.
+- Historial de partidas finalizadas guardadas en Firestore por maestro.
+- Resumen de clase escalable: una tarjeta por estudiante.
+- Detalle diagnóstico desplegable por estudiante.
+- Descarga de reporte individual CSV.
+- Reporte general Excel (.xlsx) con Resumen, Estudiantes, Resultados por habilidad y Datos detallados.
+- Certificados Top 3 corregidos a una página horizontal por estudiante.
+- Conserva fondo limpio V5.8.4, TV independiente, seguridad y lógica matemática existente.
 
-## Se conserva
-- 18 avatares gráficos.
-- Vistas separadas Estudiante / Maestro / TV.
-- TV: orden de entrada + avatar + nombre en lobby; progreso público sin exponer aciertos/errores durante Modo Integrado.
-- Maestro: progreso privado con aciertos/errores.
-- Entrada bloqueada al comenzar.
-- Temporizador global y tratamiento de preguntas sin responder.
-- Firebase/Auth/Firestore y motor matemático sin cambios de arquitectura.
+No requiere cambios adicionales en Firestore respecto a las reglas ya publicadas para V5.7/V5.8.x.
