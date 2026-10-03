@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function gameDoc(code) { return get(/databases/$(database)/documents/games/$(code)); }
+    function isTeacher(code) { return signedIn() && gameDoc(code).data.teacherUid == request.auth.uid; }
+
+    match /games/{gameCode} {
+      allow create: if signedIn()
+                    && request.resource.data.teacherUid == request.auth.uid
+                    && request.resource.data.code == gameCode
+                    && request.resource.data.status == 'lobby';
+      allow read: if signedIn();
+      allow update: if signedIn()
+                    && resource.data.teacherUid == request.auth.uid
+                    && request.resource.data.teacherUid == resource.data.teacherUid
+                    && request.resource.data.code == resource.data.code;
+      allow delete: if false;
+
+      match /players/{playerId} {
+        allow create: if signedIn()
+                      && playerId == request.auth.uid
+                      && request.resource.data.uid == request.auth.uid
+                      && request.resource.data.score == 0
+                      && request.resource.data.answered == 0
+                      && request.resource.data.finished == false;
+        allow read: if signedIn() && (playerId == request.auth.uid || isTeacher(gameCode));
+        allow update: if signedIn()
+                      && playerId == request.auth.uid
+                      && request.resource.data.uid == resource.data.uid
+                      && request.resource.data.name == resource.data.name
+                      && request.resource.data.diff(resource.data).affectedKeys()
+                           .hasOnly(['score','answered','finished','lastSkill']);
+        allow delete: if false;
+      }
+    }
+  }
+}
