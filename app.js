@@ -12,8 +12,15 @@ const curriculum={
  4:{name:'4.º grado',tag:'Explora relaciones',topics:[['place1000','🔢','Valor posicional'],['multiply','✖️','Multiplicación'],['fractions','🍕','Fracciones'],['problems','🧠','Problemas']]},
  5:{name:'5.º grado',tag:'Retos avanzados',topics:[['decimals','🔟','Decimales'],['fractions','🍕','Fracciones'],['operations','🧮','Operaciones'],['problems','🧠','Problemas']]}
 };
-const gameTypes=[['challenge','⚡','Reto rápido'],['discover','🔎','Descubre'],['memory','🃏','Memoria'],['crossword','✏️','Crucigrama'],['build','🧩','Construye']];
-let selectedGrade='2',selectedTopic='place',selectedGame='challenge',game=null,idx=0,score=0,questions=[],studentId=null,unsubs=[],currentUser=null;
+const gameTypes=[
+ ['integrated','🌟','Modo Integrado','Activo · combina automáticamente'],
+ ['challenge','⚡','Reto rápido','Incluido en el modo integrado'],
+ ['discover','🔎','Descubre','Incluido progresivamente'],
+ ['memory','🃏','Memoria','Incluido progresivamente'],
+ ['crossword','✏️','Crucigrama','Incluido progresivamente'],
+ ['build','🧩','Construye','Incluido progresivamente']
+];
+let selectedGrade='2',selectedTopic='place',selectedGame='integrated',game=null,idx=0,score=0,questions=[],studentId=null,unsubs=[],currentUser=null;
 const engine=window.MathLiveEngineV2; let responses=[];
 if(!engine) console.error('Math Live Engine V2 no está disponible.');
 
@@ -28,15 +35,24 @@ async function ensureAuth(){
   if(auth.currentUser){currentUser=auth.currentUser;return currentUser;}
   const cred=await auth.signInAnonymously(); currentUser=cred.user; return currentUser;
 }
-function netMsg(){return db&&auth?'Conexión online preparada.':'Falta completar firebase-config.js.'}
+function netMsg(){return db&&auth?'Firebase conectado ✓':'Firebase pendiente de configuración'}
 
 function renderGrades(){
- $('#grades').innerHTML=Object.entries(curriculum).map(([k,v])=>`<button class="grade ${k===selectedGrade?'active':''}" data-g="${k}"><strong>${k}</strong>${v.name}<small>${v.tag}</small></button>`).join('');
+ const order=['K','1','2','3','4','5'];
+ $('#grades').innerHTML=order.map(k=>{const v=curriculum[k];return `<button class="grade ${k===selectedGrade?'active':''}" data-g="${k}" aria-pressed="${k===selectedGrade}"><strong>${k}</strong>${v.name}<small>${v.tag}</small></button>`}).join('');
  $$('.grade').forEach(b=>b.onclick=()=>{selectedGrade=b.dataset.g;selectedTopic=curriculum[selectedGrade].topics[0][0];renderGrades();renderTopics();summary()});
 }
 function renderTopics(){let c=curriculum[selectedGrade];$('#contentTitle').textContent=`Contenido de ${c.name}`;$('#topics').innerHTML=c.topics.map(t=>`<button class="topic ${t[0]===selectedTopic?'active':''}" data-t="${t[0]}">${t[1]} ${t[2]}</button>`).join('');$$('.topic').forEach(b=>b.onclick=()=>{selectedTopic=b.dataset.t;renderTopics();summary()})}
-function renderGames(){ $('#games').innerHTML=gameTypes.map(g=>`<button class="game ${g[0]===selectedGame?'active':''}" data-game="${g[0]}">${g[1]}<b>${g[2]}</b><small>${g[0]==='challenge'?'Disponible primero':'Se incorpora por etapas'}</small></button>`).join('');$$('.game').forEach(b=>b.onclick=()=>{selectedGame=b.dataset.game;renderGames();summary()})}
-function summary(){let c=curriculum[selectedGrade],g=gameTypes.find(x=>x[0]===selectedGame);$('#setupSummary').innerHTML=`<strong>${c.name}</strong> · Modo Integrado · ${g[2]} · ${$('#qcount').value} desafíos<br><span class="small">CORE + REVIEW + APPLICATION · ${netMsg()}</span>`}
+function renderGames(){
+ $('#games').innerHTML=gameTypes.map(g=>{
+   const active=g[0]==='integrated';
+   return `<button class="game ${active?'active':''} ${active?'':'soon'}" data-game="${g[0]}" ${active?'':'disabled'} aria-pressed="${active}">${g[1]}<b>${g[2]}</b><small>${g[3]}</small></button>`;
+ }).join('');
+}
+function summary(){
+ let c=curriculum[selectedGrade];
+ $('#setupSummary').innerHTML=`<strong>${c.name}</strong> · 🌟 Modo Integrado · ${$('#qcount').value} desafíos<br><span class="small">CORE + REVIEW + APPLICATION · preguntas equivalentes y diferentes por estudiante · ${netMsg()}</span>`;
+}
 renderGrades();renderTopics();renderGames();summary();$('#qcount').onchange=summary;
 function code(){return String(Math.floor(100000+Math.random()*900000))}
 function esc(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -45,14 +61,14 @@ async function uniqueCode(){for(let i=0;i<8;i++){let c=code(),s=await db.collect
 
 $('#createGame').onclick=async()=>{
  try{
-  if(!db||!auth){alert('Primero completa firebase-config.js.');return}
+  if(!db||!auth){alert('Firebase todavía no está conectado. Completa firebase-config.js antes de crear una partida.');return}
   const user=await ensureAuth();
-  let c=curriculum[selectedGrade],t=c.topics.find(x=>x[0]===selectedTopic),gt=gameTypes.find(x=>x[0]===selectedGame),newCode=await uniqueCode();
+  let c=curriculum[selectedGrade],newCode=await uniqueCode();
   if(!engine) throw new Error('Math Live Engine V2 no está cargado.');
   const count=+$('#qcount').value, blueprint=engine.createGameBlueprint(selectedGrade,count);
-  game={code:newCode,teacherUid:user.uid,grade:selectedGrade,gradeName:c.name,topic:'integrated',topicName:'Modo Integrado',gameType:selectedGame,gameName:gt[2],count,mode:$('#mode').value,engineVersion:engine.VERSION,blueprint,status:'lobby',createdAt:firebase.firestore.FieldValue.serverTimestamp()};
+  game={code:newCode,teacherUid:user.uid,grade:selectedGrade,gradeName:c.name,topic:'integrated',topicName:'Modo Integrado',gameType:'integrated',gameName:'Modo Integrado',count,mode:$('#mode').value,engineVersion:engine.VERSION,blueprint,status:'lobby',createdAt:firebase.firestore.FieldValue.serverTimestamp()};
   await db.collection('games').doc(newCode).set(game);
-  $('#gameCode').textContent=newCode;$('#gameSummary').textContent=`${game.gradeName} · ${game.topicName} · ${game.gameName} · ${game.count} desafíos`;show('teacherLobby');listenTeacher(newCode);
+  $('#gameCode').textContent=newCode;$('#gameSummary').textContent=`${game.gradeName} · ${game.topicName} · ${game.count} desafíos`;show('teacherLobby');listenTeacher(newCode);
  }catch(e){console.error(e);alert('No se pudo crear la partida. Revisa la configuración y las reglas de Firebase.');}
 };
 function listenTeacher(c){cleanup();unsubs.push(db.collection('games').doc(c).collection('players').orderBy('joinedAt').onSnapshot(s=>{let players=s.docs.map(d=>({id:d.id,...d.data()}));$('#studentCount').textContent=players.length;$('#studentList').innerHTML=players.map(p=>`<div class="studentLine"><b>🎮 ${esc(p.name)}</b><span>${p.finished?`⭐ ${p.score}/${p.answered}`:'Conectado ✓'}</span></div>`).join('');$('#teacherMsg').textContent=players.length?'¡Equipo listo! Puedes comenzar cuando quieras.':'Esperando estudiantes…'},e=>{console.error(e);$('#teacherMsg').textContent='No se pudo leer el lobby. Revisa las reglas de Firestore.'}))}

@@ -32,3 +32,11 @@ Proyecto educativo de Rene M. Velazquez Avila.
 - Cada estudiante recibe variantes propias del mismo plan de habilidades.
 - Registro de CORE / REVIEW / APPLICATION y evidencia diagnóstica.
 - El generador matemático V4 fue retirado del flujo de juego.
+
+## V5.1 — Ajuste técnico y visual
+- Modo Integrado es ahora el modo real y predeterminado; ya no depende de seleccionar Reto rápido.
+- K aparece primero, seguido de 1.º a 5.º.
+- Tarjetas y botones tienen respuesta táctil: elevación al pasar el cursor y presión al hacer clic/tocar.
+- Se respeta `prefers-reduced-motion` por accesibilidad.
+- Los formatos especializados aparecen como parte del sistema, pero no se presentan falsamente como implementados si todavía están en desarrollo.
+- Se completaron todos los identificadores conocidos del proyecto Firebase. Falta únicamente pegar la API key exacta del proyecto.
