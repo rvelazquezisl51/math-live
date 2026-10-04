@@ -1,0 +1,31 @@
+MATH LIVE V6.0 — CIERRE K–1
+Fecha: 2026-10-04
+
+OBJETIVO
+Cerrar la primera fase de Kinder y 1.º con prioridad pedagógica, visual y lingüística antes de profundizar 2.º–5.º.
+
+IMPLEMENTADO
+- Todas las preguntas K–1 requieren representación visual en el validador.
+- Kinder: conteo de objetos, toque/marcado uno-a-uno, comparación de colecciones, anterior/siguiente mediante camino numérico, composición visual de cantidades.
+- 1.º: marcos de diez, parte faltante, conteo hacia adelante con recta/saltos, comparación de números con representación de decenas/unidades y equivalencia de sumas.
+- Comparación visual: el estudiante puede tocar directamente el grupo/representación; no depende de leer “izquierda/derecha”.
+- Audio automático para K–1 y botones de repetición.
+- Idiomas configurables por partida: Español, English o Bilingüe ES/EN.
+- En modo bilingüe hay botones independientes 🔊 ES y 🔊 EN.
+- Las instrucciones K–1 incluyen versión oral en español e inglés.
+- La interfaz de entrada del estudiante es bilingüe.
+- Sonido discreto cuando entra un nuevo estudiante (maestro y TV), al comenzar y al finalizar.
+- La evidencia diagnóstica de cada respuesta registra representación, idioma configurado y cantidad de reproducciones de audio sin penalizar el puntaje matemático.
+- Se corrigió la generación para 10, 15 y 20 desafíos; antes el plan estaba limitado internamente a 15.
+
+VALIDACIÓN AUTOMÁTICA
+- 7,500 ítems de Kinder revisados: 0 sin representación, 0 sin prompt EN, 0 sin audio EN.
+- 7,500 ítems de 1.º revisados: 0 sin representación, 0 sin prompt EN, 0 sin audio EN.
+- Auditoría general: 100 partidas x 15 desafíos x 6 grados = 9,000 preguntas, 0 fallos estructurales.
+- Sintaxis JavaScript validada en motor, estudiante, maestro y TV.
+
+CRITERIO PEDAGÓGICO
+El gráfico no es decoración: debe aportar información o permitir una acción matemática. K–1 no depende de lectura en español para comprender la consigna. El audio y el idioma no alteran la puntuación matemática.
+
+LÍMITE DE ESTA VALIDACIÓN
+La auditoría comprueba reglas programadas y consistencia estructural. No sustituye observación con estudiantes ni constituye certificación psicométrica/curricular externa. Antes de despliegue general se recomienda una prueba corta con 2–4 estudiantes por grado para observar usabilidad táctil, tamaño y claridad de instrucciones.

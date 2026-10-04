@@ -1,0 +1,38 @@
+MATH LIVE V5.9 — AJUSTE PEDAGÓGICO VISUAL K–1
+Fecha: 2026-10-03
+
+OBJETIVO
+Corregir el enfoque de Kinder y 1.º para que la dificultad no dependa principalmente de lectura o notación simbólica. La representación matemática pasa a ser parte del ítem.
+
+CAMBIOS PRINCIPALES
+KINDER
+- Conteo: colecciones visuales con disposiciones en fila, agrupadas y variadas.
+- Conteo uno a uno: los objetos pueden tocarse/marcarse mientras se cuentan.
+- Comparación: dos colecciones visuales; el niño identifica dónde hay más.
+- Antes/después: camino numérico visual.
+- Composición: dos grupos visibles que se juntan; no se exige comenzar con una ecuación simbólica.
+- Lectura automática de la instrucción y botón de audio.
+
+PRIMER GRADO
+- Suma: marcos de diez y grupos visibles antes de la respuesta.
+- Parte faltante: representación de cantidad actual y meta.
+- Contar hacia adelante: recta numérica con salto/arco.
+- Comparación de números de dos cifras: apoyo con decenas/unidades.
+- Sumas equivalentes: representación visual de los dos grupos.
+- Lectura automática de la instrucción y botón de audio.
+
+SEGUNDO GRADO
+- La familia de recta numérica ahora exige representación gráfica con arco y dirección visible.
+- Se prepara la arquitectura para evolucionar a arcos manipulables/arrastrables y registro de estrategia.
+
+VALIDACIÓN
+- Los ítems de K y 1.º son rechazados por el motor si no contienen representación visual.
+- Los ítems de recta numérica son rechazados si no contienen la representación correspondiente.
+- Auditoría automática ejecutada: 100 partidas x 15 preguntas x 6 grados = 9,000 preguntas.
+- Fallos estructurales detectados: 0.
+
+CRITERIO PEDAGÓGICO
+Una pregunta no se considera adecuada solo porque los números estén dentro del rango del grado. También debe corresponder la representación, el lenguaje, la acción solicitada y el nivel de abstracción.
+
+NOTA
+La auditoría automática verifica las reglas programadas y la consistencia estructural. No sustituye una revisión curricular oficial ni una validación psicométrica. Antes de uso formal con estudiantes se recomienda revisar muestras reales de partidas K y 1.º en pantalla/táctil.

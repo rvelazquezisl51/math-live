@@ -1,0 +1,47 @@
+MATH LIVE V6.1 — AUDITORÍA 2.º Y 3.º, MÓDULO 1
+Fecha: 2026-10-04
+
+Base curricular revisada: Eureka Math², Module 1, por grado.
+
+2.º GRADO — familias incorporadas/revisadas
+- Datos y gráficas de barras.
+- Medición en centímetros y comparación de longitudes.
+- Regla/cinta como modelo y conexión con recta numérica.
+- Conteo por unidades, decenas y centenas hasta 1,000.
+- Centenas, decenas y unidades.
+- Forma estándar/desarrollada/unitaria/escrita.
+- Reagrupación 10U↔1D y 10D↔1C.
+- Representaciones no normalizadas (más de 9 unidades o decenas).
+- Comparación de números de tres cifras y formas equivalentes.
+- Dinero como modelo de 1/10/100.
+- Redondeo a la decena mediante recta vertical.
+- Ubicación/comparación de diferentes formas en recta numérica.
+
+3.º GRADO — familias incorporadas/revisadas
+- Organizar, contar y representar colecciones (puente desde 2.º).
+- Grupos iguales.
+- Arrays.
+- Significado de los factores.
+- Problemas de multiplicación con dibujo/modelo y ecuación.
+- División: tamaño desconocido de cada grupo.
+- División: número desconocido de grupos.
+- Propiedad conmutativa mediante arrays.
+- Propiedad distributiva mediante arrays divididos.
+- División como factor desconocido.
+- Fluidez con unidades 2, 3, 4, 5 y 10.
+- Problemas de uno/dos pasos.
+
+DISEÑO
+- ES / EN / bilingüe y audio se conservan.
+- La representación es parte del ítem, no decoración.
+- 2.º y 3.º reciben apoyo visual también en REVIEW cuando corresponde.
+- No se introducen contenidos futuros como REVIEW.
+
+PRUEBA AUTOMÁTICA
+- 300 partidas x 15 preguntas x 6 grados = 27,000 preguntas validadas.
+- Fallos estructurales: 0.
+- Pruebas adicionales 2.º y 3.º con 10/15/20 desafíos: 12,000 ítems.
+- Ítems con representación visual en esas pruebas: 100%.
+
+NOTA
+La auditoría automatizada verifica reglas programadas, coherencia estructural y cobertura del motor. No sustituye la observación de estudiantes ni constituye certificación oficial del currículo.
