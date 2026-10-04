@@ -1,4 +1,4 @@
-# Math Live V6.1 — K–3 visual · Módulo 1
+# Math Live V6.2 — K–3 visual · Módulo 1
 
 Esta versión conserva K–1 y amplía 2.º y 3.º con representaciones visuales alineadas al trabajo de Eureka Math² Module 1, audio ES/EN/bilingüe y validación estructural.
 
@@ -30,3 +30,11 @@ Esta revisión incorpora representaciones matemáticas obligatorias para Kinder 
 - Evidencia diagnóstica registra representación y uso de audio sin penalizar Matemáticas.
 - Generación corregida para partidas de 10, 15 y 20 desafíos.
 - Ver `AUDITORIA_K1_V6_0.txt`.
+
+## V6.2 — Correcciones de prueba real K–3
+- Kinder: `Cuenta los objetos` ya no genera una colección vacía (1–10).
+- Guardia de renderizado: si una representación declarada no tiene renderer, el ítem se regenera en vez de mostrarse vacío.
+- Pantalla final del estudiante distingue `correctas` de `respondidas`; 14/15 correctas ya no parece 14/15 respondidas.
+- La partida se cierra automáticamente cuando todos los estudiantes conectados han finalizado, evitando que quede fuera del historial por seguir en estado `playing`.
+- Historial muestra partidas finalizadas y también partidas en curso/interrumpidas del maestro para facilitar recuperación de sesiones anteriores.
+- Diagnóstico conserva CORE/REVIEW y usa una descripción más clara cuando solo existe una evidencia.
