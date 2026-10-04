@@ -16,7 +16,7 @@ service cloud.firestore {
       allow update: if isTeacher(gameCode)
                     && request.resource.data.teacherUid == resource.data.teacherUid
                     && request.resource.data.code == resource.data.code;
-      allow delete: if false;
+      allow delete: if realTeacher() && resource.data.teacherUid == request.auth.uid;
 
       match /players/{playerId} {
         allow create: if signedIn()
@@ -37,7 +37,7 @@ service cloud.firestore {
                       && gameDoc(gameCode).data.status in ['playing','finished']
                       && request.resource.data.diff(resource.data).affectedKeys()
                            .hasOnly(['score','answered','finished','lastSkill','lastStandard','lastLayer','evidence','diagnostic','finishedAt','unanswered','finishReason']);
-        allow delete: if false;
+        allow delete: if isTeacher(gameCode);
       }
     }
   }
