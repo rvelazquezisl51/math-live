@@ -1,0 +1,17 @@
+MATH LIVE V6.4 — Auditoría automática
+Fecha: 2026-10-05
+
+Cambios:
+- Nueva familia Enlaza las parejas para grados 2–5 con contenido ajustado al grado.
+- Nueva familia Construye el número con tarjetas de valor para 2, 4 y 5.
+- 3.º mantiene Módulo 1 centrado en multiplicación/división: Enlaza usa grupos ↔ ecuación/producto, evitando introducir valor posicional de otros módulos como CORE.
+- Memoria Matemática K–5 conservada y con movimiento hover/touch mejorado.
+- Tarjetas de parejas y de construcción con microanimaciones y feedback sonoro al completar parejas.
+- Cache-busting actualizado a V6.4.
+
+Prueba del motor:
+- 100 partidas x 15 preguntas x 6 grados = 9,000 preguntas.
+- Fallos estructurales: 0.
+- Se verificó aparición de Memoria, Enlaza y Construye en los grados donde corresponde.
+
+Nota: la auditoría automática valida reglas programadas; la prueba en navegador/dispositivo sigue siendo necesaria para validar renderizado e interacción real.

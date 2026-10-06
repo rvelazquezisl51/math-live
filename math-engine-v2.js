@@ -7,7 +7,7 @@
  */
 (function(global){
 "use strict";
-const V="2.6.0-v63-visual-memory";
+const V="2.7.0-v64-varied-interactions";
 const G=["K","1","2","3","4","5"];
 const R=(a,b)=>Math.floor(Math.random()*(b-a+1))+a, P=a=>a[R(0,a.length-1)];
 const S=a=>{a=[...a];for(let i=a.length-1;i;i--){let j=R(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
@@ -40,7 +40,9 @@ const META={
   ["2.NBT.A.4","Place Value","Compare three-digit numbers and equivalent forms","compare3","reason",3],
   ["2.NBT.A","Place Value","Count $1 $10 and $100 as place-value models","moneyPV","represent",2],
   ["2.NBT.A","Place Value","Round two-digit numbers to nearest ten on number line","roundTens","reason",3],
-  ["2.NBT.A","Number Line","Plot and compare numbers in different forms","plotForms","reason",3]
+  ["2.NBT.A","Number Line","Plot and compare numbers in different forms","plotForms","reason",3],
+  ["2.NBT.A.3","Place Value","Build standard form from expanded parts","buildNumberCards","represent",2],
+  ["2.NBT.A.3","Place Value","Match equivalent number representations","matchPairs","represent",3]
  ],
  3:[
   ["2.NBT.A.2","Foundational Review","Organize count and represent a collection","organizeCollection","represent",2],
@@ -54,7 +56,8 @@ const META={
   ["3.OA.B.5","Properties","Distributive property with arrays","distributive","reason",4],
   ["3.OA.B.6","Multiplication & Division","Division as unknown factor","missingFactor","reason",3],
   ["3.OA.C.7","Fluency","Multiply/divide with units 2 3 4 5 and 10","multiply","procedure",2],
-  ["3.OA.D.8","Problem Solving","One- and two-step multiplication/division reasoning","twoStepMD","apply",4]
+  ["3.OA.D.8","Problem Solving","One- and two-step multiplication/division reasoning","twoStepMD","apply",4],
+  ["3.OA.A.1","Multiplication","Match models equations and products","matchPairs","represent",3]
  ],
  4:[
   ["4.NBT.A","Place Value","Value of digits in multi-digit numbers","placeValueLarge","represent",2],
@@ -62,7 +65,9 @@ const META={
   ["4.NBT.A","Place Value","Round multi-digit numbers","roundLarge","reason",3],
   ["4.NBT.B","Addition & Subtraction","Multi-digit addition/subtraction","addSubtractLarge","procedure",3],
   ["4.NBT.A","Place Value","Multi-digit number forms","numberFormsLarge","represent",3],
-  ["4.OA.A","Problem Solving","Multi-step whole-number reasoning","wordProblemAS","apply",4]
+  ["4.OA.A","Problem Solving","Multi-step whole-number reasoning","wordProblemAS","apply",4],
+  ["4.NBT.A","Place Value","Build and match equivalent multi-digit forms","matchPairs","represent",3],
+  ["4.NBT.A","Place Value","Build standard form from expanded parts","buildNumberCards","represent",3]
  ],
  5:[
   ["5.NBT.A","Place Value","Place-value relationships","placeValue5","reason",3],
@@ -70,7 +75,9 @@ const META={
   ["5.NBT.B","Whole Number Operations","Multi-digit multiplication","multiplyWhole","procedure",3],
   ["5.NBT.B","Whole Number Operations","Whole-number division","divideWhole","procedure",4],
   ["5.NBT.A","Place Value","Compare/interpret large numbers","compare5","reason",3],
-  ["5.OA.A","Problem Solving","Multi-step whole-number problem","wordProblem5","apply",4]
+  ["5.OA.A","Problem Solving","Multi-step whole-number problem","wordProblem5","apply",4],
+  ["5.NBT.A","Place Value","Match equivalent large-number representations","matchPairs","reason",4],
+  ["5.NBT.A","Place Value","Build standard form from expanded parts","buildNumberCards","represent",3]
  ]
 };
 const REVIEW={
@@ -126,6 +133,8 @@ function gen(skill,g,review=false){
  case"numberLine":{let start=R(100,750),step=P([10,20,50,100]),sub=Math.random()<.35,end=sub?Math.max(0,start-step):start+step,delta=end-start;return item(g,skill,"Sigue el salto en la recta numérica. ¿Dónde termina?",end,[start,Math.max(0,end-10),end+10],{sourceGrade,representation:{type:"numberLineArc",start,end,delta,direction:delta>=0?"add":"subtract"},audioPrompt:`Empieza en ${start}. Sigue el salto ${delta>=0?"hacia adelante":"hacia atrás"} de ${Math.abs(delta)}. ¿Dónde terminas?`,promptEn:"Follow the jump on the number line. Where does it end?",audioPromptEn:`Start at ${start}. Follow the ${Math.abs(delta)} jump ${delta>=0?"forward":"backward"}. Where do you land?`})}
  case"roundTens":{let n=R(10,99),z=Math.round(n/10)*10;return item(g,skill,"Usa la recta vertical para redondear a la decena más cercana.",z,[Math.floor(n/10)*10,Math.ceil(n/10)*10,n].filter(x=>x!==z),{sourceGrade,representation:{type:"verticalRound",number:n,low:Math.floor(n/10)*10,high:Math.ceil(n/10)*10},audioPrompt:`Ubica ${n} entre sus dos decenas. ¿A cuál está más cerca?`,promptEn:"Use the vertical number line to round to the nearest ten.",audioPromptEn:`Place ${n} between its two tens. Which ten is closer?`})}
  case"plotForms":{let a=R(100,899),b=a+P([10,20,50,100]),z=b;return item(g,skill,"Mira las dos formas. ¿Qué número debe ir en el punto señalado?",z,[a,b+10,Math.max(0,b-10)],{sourceGrade,representation:{type:"plotForms",start:a,end:b,startForm:expanded(a),endForm:unit(b)},audioPrompt:"Relaciona las formas del número con su lugar en la recta. ¿Qué número falta?",promptEn:"Look at the two forms. What number belongs at the marked point?",audioPromptEn:"Connect the number forms to their places on the number line. What number is missing?"})}
+ case"buildNumberCards":{let lo=g===2?100:g===3?1000:10000,hi=g===2?999:g===3?9999:999999,n=R(lo,hi),parts=String(n).split("").map((d,i,a)=>+d*10**(a.length-i-1)).filter(Boolean),wrong=[n+10,Math.max(lo,n-10),n+100];return item(g,skill,"Une las tarjetas de valor y forma el número estándar.",n,wrong,{sourceGrade,standard:g===2?"2.NBT.A.3":g===3?"3.NBT.A":""+g+".NBT.A",content:"Place Value",subskill:"Forma desarrollada → estándar",cognitive:"represent",representation:{type:"buildNumberCards",parts,number:n},audioPrompt:"Mira las tarjetas. Suma sus valores y encuentra la forma estándar.",promptEn:"Use the value cards to build the standard form.",audioPromptEn:"Look at the cards. Add their values and find the standard form."})}
+ case"matchPairs":{let pairs=[];if(g===2){let nums=S([213,248,342,429,457,485,526,631]).slice(0,4);pairs=nums.map(n=>({left:unit(n),right:String(n)}))}else if(g===3){let facts=S([[2,6],[3,4],[4,5],[5,6],[10,4],[3,7]]).slice(0,4);pairs=facts.map(([a,b])=>({left:`${a} grupos de ${b}`,right:`${a} × ${b} = ${a*b}`}))}else{let lo=g===4?1000:10000,hi=g===4?9999:999999,nums=Array.from({length:4},()=>R(lo,hi));pairs=nums.map(n=>({left:expanded(n),right:String(n)}))}let left=S(pairs.map((x,i)=>({text:x.left,pair:i}))),right=S(pairs.map((x,i)=>({text:x.right,pair:i})));return {grade:g,skill,prompt:"Enlaza las representaciones equivalentes.",promptEn:"Match the equivalent representations.",audioPrompt:"Elige una tarjeta de la izquierda y encuentra su pareja a la derecha.",audioPromptEn:"Choose a card on the left and find its matching card on the right.",answer:"__pairs__",options:[],itemType:"pairs",sourceGrade,standard:g===2?"2.NBT.A.3":g===3?"3.OA.A.1":`${g}.NBT.A`,content:g===3?"Multiplication":"Place Value",subskill:"Representaciones equivalentes",cognitive:"represent",difficulty:Math.min(4,g),representation:{type:"matchPairs",left,right,pairs:pairs.length}}}
  case"memoryMath":{let pairs=[],std="K.CC.B",content="Counting & Cardinality",sub="Match quantity and numeral";if(g===0){let nums=S([1,2,3,4,5,6,7,8,9,10]).slice(0,4);pairs=nums.map(n=>[{kind:"objects",value:n,label:n+" objetos"},{kind:"text",value:String(n),label:String(n)}]);std="K.CC.B";sub="Cantidad ↔ numeral"}else if(g===1){let nums=S([5,6,7,8,9,10,11,12,13,14]).slice(0,5);pairs=nums.map(n=>[{kind:"dots",value:n,label:n+" puntos"},{kind:"text",value:String(n),label:String(n)}]);std="1.OA.B";content="Addition & Number Sense";sub="Representación ↔ número"}else if(g===2){let nums=S([124,236,342,415,527,631,748,852]).slice(0,6);pairs=nums.map(n=>[{kind:"text",value:expanded(n),label:expanded(n)},{kind:"text",value:String(n),label:String(n)}]);std="2.NBT.A.3";content="Place Value";sub="Forma desarrollada ↔ estándar"}else if(g===3){let facts=S([[2,4],[3,4],[5,3],[4,4],[2,5],[3,5],[4,5],[5,5],[10,2]]).slice(0,7);pairs=facts.map(([a,b])=>[{kind:"text",value:`${a} × ${b}`,label:`${a} × ${b}`},{kind:"text",value:String(a*b),label:String(a*b)}]);std="3.OA.A.1";content="Multiplication";sub="Expresión ↔ producto"}else if(g===4){let nums=S([1200,2400,3600,4500,5200,6300,7400,8100,9200]).slice(0,8);pairs=nums.map(n=>[{kind:"text",value:expanded(n),label:expanded(n)},{kind:"text",value:String(n),label:String(n)}]);std="4.NBT.A";content="Place Value";sub="Representaciones equivalentes"}else{let facts=S([[3,100],[42,10],[7,1000],[56,100],[9,10000],[81,10],[25,1000],[64,100],[12,10000],[37,10]]).slice(0,9);pairs=facts.map(([a,b])=>[{kind:"text",value:`${a} × ${b}`,label:`${a} × ${b}`},{kind:"text",value:String(a*b),label:String(a*b)}]);std="5.NBT.A";content="Powers of Ten";sub="Expresión ↔ valor"}let cards=S(pairs.flatMap((pair,i)=>pair.map(c=>({...c,pair:i}))));return {grade:g,skill:"memoryMath",prompt:"Encuentra las parejas matemáticas.",promptEn:"Find the matching math pairs.",audioPrompt:"Destapa dos tarjetas. Encuentra las parejas que representan la misma cantidad.",audioPromptEn:"Turn over two cards. Find pairs that represent the same quantity.",answer:"__memory__",options:[],itemType:"memory",sourceGrade:g,standard:std,content,subskill:sub,cognitive:"represent",difficulty:Math.min(4,1+g),representation:{type:"memoryCards",cards,pairs:pairs.length}}} 
  case"organizeCollection":{let groups=P([2,3,4,5]),each=R(2,6),z=groups*each;return item(g,skill,"Organiza la colección en grupos iguales. ¿Cuántos objetos hay?",z,[groups+each,z-groups,z+groups],{sourceGrade,representation:{type:"looseCollection",count:z,suggestedGroups:groups},audioPrompt:"Mira la colección. Organízala mentalmente en grupos iguales y encuentra el total.",promptEn:"Organize the collection into equal groups. How many objects are there?",audioPromptEn:"Look at the collection. Organize it into equal groups and find the total."})}
  case"equalGroups":{let groups=P([2,3,4,5,10]),each=R(2,8),z=groups*each;return item(g,skill,"Mira los grupos iguales. ¿Cuántos objetos hay en total?",z,[groups+each,z-each,z+each],{sourceGrade,representation:{type:"equalGroups",groups,each},audioPrompt:`Hay ${groups} grupos con ${each} en cada grupo. ¿Cuántos hay en total?`,promptEn:"Look at the equal groups. How many objects are there altogether?",audioPromptEn:`There are ${groups} groups with ${each} in each group. How many are there altogether?`})}
@@ -158,11 +167,12 @@ function validate(q){
  let e=[];if(!q||typeof q!=="object")return{valid:false,errors:["object"]};
  if(!q.prompt||!q.skill||q.answer===undefined)e.push("fields");
  if(/undefined|NaN|null/.test(JSON.stringify(q)))e.push("token");
- if(q.itemType!=="memory"){
+ if(!["memory","pairs"].includes(q.itemType)){
   if(!Array.isArray(q.options)||q.options.length<2)e.push("options");
   if(U(q.options).length!==q.options.length)e.push("duplicate");
   if(!q.options.includes(String(q.answer)))e.push("answer-missing");
- }else if(!q.representation||q.representation.type!=="memoryCards"||!Array.isArray(q.representation.cards))e.push("memory-invalid");
+ }else if(q.itemType==="memory"&&(!q.representation||q.representation.type!=="memoryCards"||!Array.isArray(q.representation.cards)))e.push("memory-invalid");
+ else if(q.itemType==="pairs"&&(!q.representation||q.representation.type!=="matchPairs"))e.push("pairs-invalid");
  if(q.grade===0&&/-\d/.test(q.prompt+" "+q.options.join(" ")))e.push("negative-K");
  if(q.grade<3&&/[×÷]/.test(q.prompt))e.push("future-operation");
  if(q.grade<=1&&!q.representation)e.push("visual-required-K1");
